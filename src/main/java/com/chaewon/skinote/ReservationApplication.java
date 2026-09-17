@@ -1,4 +1,4 @@
-package com.chaewon.reservation;
+package com.chaewon.skinote;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

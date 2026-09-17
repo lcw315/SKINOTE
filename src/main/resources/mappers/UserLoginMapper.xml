@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace에는 자바 매퍼 인터페이스의 전체 경로를 적어줍니다 -->
+<mapper namespace="com.chaewon.skinote.userLogin.mapper.UserLoginMapper">
+
+    <!-- 자바 인터페이스에 만든 메서드 이름과 id가 똑같아야 합니다! -->
+    <select id="userlogin" parameterType="com.chaewon.skinote.common.box.Box" resultType="com.chaewon.skinote.common.box.Box">
+        SELECT 
+        USER_ID AS "userId",
+        USER_EMAIL AS "userEmail",
+        USER_TEL AS "userTel",
+        PASSWORD AS "password"
+        FROM TB_USER
+        WHERE USER_EMAIL = #{id} 
+        AND PASSWORD = #{password}
+    </select>
+
+</mapper>
