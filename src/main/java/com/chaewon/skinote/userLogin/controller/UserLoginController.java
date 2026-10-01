@@ -20,7 +20,7 @@ public class UserLoginController {
 
     private final UserLoginService userLoginService;
 
-
+    // 로그인 기능
     @PostMapping("/auth/login")
     public ResponseEntity<Box> login(@RequestBody Map<String, Object> requestBody,HttpSession session) {
         Box box = new Box(requestBody);
@@ -35,5 +35,15 @@ public class UserLoginController {
         return ResponseEntity.ok(modelBox);
     }
 
+    @PostMapping("/auth/logout")
+    public ResponseEntity<Box> logout(HttpSession session) {
+        Box modelBox = new Box();
+
+        // 세션 무효화
+        session.invalidate();
+
+        return ResponseEntity.ok(modelBox);
+    }
+    
     
 }
