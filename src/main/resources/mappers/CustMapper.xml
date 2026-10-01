@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chaewon.skinote.customer.mapper.CustMapper">
+
+    <select id="searchCustList" parameterType="com.chaewon.skinote.common.box.Box" resultType="com.chaewon.skinote.common.box.Box">
+        SELECT C.CUST_ID as "custId", C.CUST_NM as "custName", 
+        C.CUST_TEL as "custTel", C.CUST_MEMO as "custMemo", C.IN_DT as "inDt"       
+        FROM CUST C
+        JOIN STORE S ON C.STORE_ID = S.STORE_ID
+        WHERE S.USER_ID = #{userId} 
+        ORDER BY C.IN_DT DESC
+    </select>
+
+    <select id="todayCustList" parameterType="com.chaewon.skinote.common.box.Box" resultType="com.chaewon.skinote.common.box.Box">
+            SELECT R.RESERV_ID   AS "reservId",
+           C.CUST_ID     AS "custId",
+           C.CUST_NM     AS "custName",
+           C.CUST_TEL    AS "custTel",
+           C.CUST_MEMO   AS "custMemo",
+           CO.COURSE_NM  AS "courseName",
+           R.START_TIME  AS "startTime",
+           R.END_TIME    AS "endTime",
+           R.RESERV_STAT AS "reservStat"
+           FROM RESERVATION R
+            JOIN CUST C   ON R.CUST_ID   = C.CUST_ID
+            JOIN COURSE CO ON R.COURSE_ID = CO.COURSE_ID
+            JOIN STORE S  ON R.STORE_ID  = S.STORE_ID
+            WHERE S.USER_ID = #{userId}
+            AND TRUNC(R.RESERV_DATE) = TRUNC(SYSDATE)
+            ORDER BY R.START_TIME ASC
+
+    </select>
+
+</mapper>
